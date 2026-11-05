@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Muhammad Abdullah · Offensive Security</title>
+  <meta name="description" content="Muhammad Abdullah Bin Altaf Anjum — Information Security undergrad at NUST (MCS). Penetration testing, Android application security, OSINT and threat intelligence.">
+  <meta name="theme-color" content="#060608">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23060608'/%3E%3Cpath d='M12 50V14h8l12 18 12-18h8v36h-8V28L32 44 20 28v22z' fill='%23ff1e3c'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ================= BOOT SEQUENCE ================= -->
+  <div class="boot" id="boot" aria-hidden="true">
+    <div class="boot__half boot__half--top"></div>
+    <div class="boot__half boot__half--bottom"></div>
+    <div class="boot__term">
+      <pre id="bootLog"></pre>
+      <div class="boot__granted" id="bootGranted">ACCESS GRANTED</div>
+      <div class="boot__skip">[ click or press any key to skip ]</div>
+    </div>
+  </div>
+
+  <!-- ================= FX LAYERS ================= -->
+  <canvas id="rain" class="fx-rain" aria-hidden="true"></canvas>
+  <div class="fx-grid" aria-hidden="true"></div>
+  <div class="fx-noise" aria-hidden="true"></div>
+  <div class="fx-scan" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"></span></div>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <!-- ================= NAV ================= -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__logo" aria-label="Back to top">
+      <span class="nav__logo-mark">MA</span><span class="nav__logo-txt">://abdullah<span class="blink">_</span></span>
+    </a>
+    <nav class="nav__links" id="navLinks" aria-label="Sections">
+      <a href="#whoami"><i>01</i>whoami</a>
+      <a href="#mission-log"><i>02</i>mission log</a>
+      <a href="#arsenal"><i>03</i>arsenal</a>
+      <a href="#creds"><i>04</i>creds</a>
+      <a href="#command"><i>05</i>command</a>
+      <a href="#contact" class="nav__cta magnetic">ENGAGE</a>
+    </nav>
+    <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span></button>
+  </header>
+
+  <main id="top">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="hero__copy">
+        <p class="tag" data-reveal><span class="tag__dot"></span>OPEN TO OPPORTUNITIES <b>//</b> RED TEAM TRACK</p>
+
+        <h1 class="hero__name" aria-label="Muhammad Abdullah Bin Altaf Anjum">
+          <span class="line" data-reveal><span class="glitch" data-text="MUHAMMAD">MUHAMMAD</span></span>
+          <span class="line" data-reveal><span class="glitch glitch--red" data-text="ABDULLAH">ABDULLAH</span></span>
+          <span class="line line--sub" data-reveal>BIN ALTAF ANJUM</span>
+        </h1>
+
+        <p class="hero__role mono" data-reveal>
+          <span class="prompt">root@mabaa:~#</span> <span id="typer"></span><span class="caret"></span>
+        </p>
+
+        <p class="hero__pitch" data-reveal>
+          <strong>Information Security</strong> undergrad at <strong>NUST (MCS)</strong>. I break things on purpose:
+          <mark>penetration testing</mark>, <mark>Android application security</mark> and <mark>OSINT</mark>.
+          President of the Information Security Society. Two security roles shipped, one custom pentest tool in the making.
+        </p>
+
+        <div class="hero__ctas" data-reveal>
+          <a href="#mission-log" class="btn btn--red magnetic"><span>View mission log</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="assets/Muhammad-Abdullah-Resume.pdf" class="btn btn--ghost magnetic" download><span>Download resume</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a>
+        </div>
+
+        <dl class="stats" data-reveal>
+          <div class="stat"><dt>CGPA · NUST</dt><dd><span data-count="3.64" data-decimals="2">0.00</span></dd></div>
+          <div class="stat"><dt>Industry roles</dt><dd><span data-count="2" data-pad="2">00</span></dd></div>
+          <div class="stat"><dt>Certs earned</dt><dd><span data-count="4" data-pad="2">00</span><small>+1</small></dd></div>
+          <div class="stat stat--hot"><dt>National CTF</dt><dd>#<span data-rank="13">99</span></dd></div>
+        </dl>
+      </div>
+
+      <div class="hero__visual" data-reveal>
+        <div class="hud">
+          <svg class="hud__ring" viewBox="0 0 400 400" aria-hidden="true">
+            <circle cx="200" cy="200" r="190" class="r1"/>
+            <circle cx="200" cy="200" r="168" class="r2"/>
+            <circle cx="200" cy="200" r="140" class="r3"/>
+            <path d="M200 0v34M200 366v34M0 200h34M366 200h34" class="ticks"/>
+          </svg>
+          <div class="hud__glow"></div>
+          <span class="hud__giant" aria-hidden="true">0x0</span>
+
+          <div class="photo" id="photo">
+            <img src="assets/profile.webp" alt="Portrait of Muhammad Abdullah, arms crossed" width="1100" height="1641">
+            <span class="photo__ghost photo__ghost--r"></span>
+            <span class="photo__ghost photo__ghost--c"></span>
+            <span class="photo__beam"></span>
+          </div>
+
+          <span class="hud__corner hud__corner--tl"></span><span class="hud__corner hud__corner--tr"></span>
+          <span class="hud__corner hud__corner--bl"></span><span class="hud__corner hud__corner--br"></span>
+
+          <div class="hud__label hud__label--a mono"><b>SUBJECT</b> M.A.B.A.A<br><b>STATUS</b> <em class="ok">ACTIVE</em></div>
+          <div class="hud__label hud__label--b mono"><b>LOC</b> ISLAMABAD, PK<br><b>CLEARANCE</b> <em>RED</em></div>
+          <div class="hud__label hud__label--c mono" id="hudClock">00:00:00 PKT</div>
+        </div>
+      </div>
+
+      <a href="#whoami" class="scroll-cue mono" aria-label="Scroll down"><span>SCROLL</span><i></i></a>
+    </section>
+
+    <!-- ================= MARQUEE ================= -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__row">
+        <div class="marquee__track">
+          <span>VAPT</span><b>✕</b><span>ANDROID APPSEC</span><b>✕</b><span>OSINT</span><b>✕</b><span>THREAT INTEL</span><b>✕</b><span>WIFI HACKING</span><b>✕</b><span>EASM</span><b>✕</b><span>CTF PLAYER</span><b>✕</b>
+          <span>VAPT</span><b>✕</b><span>ANDROID APPSEC</span><b>✕</b><span>OSINT</span><b>✕</b><span>THREAT INTEL</span><b>✕</b><span>WIFI HACKING</span><b>✕</b><span>EASM</span><b>✕</b><span>CTF PLAYER</span><b>✕</b>
+        </div>
+      </div>
+      <div class="marquee__row marquee__row--rev">
+        <div class="marquee__track">
+          <span>NMAP</span><b>//</b><span>METASPLOIT</span><b>//</b><span>BURP SUITE</span><b>//</b><span>KALI LINUX</span><b>//</b><span>CROWDSTRIKE FALCON</span><b>//</b><span>ZSCALER</span><b>//</b><span>ASTRA</span><b>//</b>
+          <span>NMAP</span><b>//</b><span>METASPLOIT</span><b>//</b><span>BURP SUITE</span><b>//</b><span>KALI LINUX</span><b>//</b><span>CROWDSTRIKE FALCON</span><b>//</b><span>ZSCALER</span><b>//</b><span>ASTRA</span><b>//</b>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 01 WHOAMI ================= -->
+    <section class="section" id="whoami">
+      <header class="sec-head">
+        <span class="sec-head__num mono">01 //</span>
+        <h2 class="sec-head__title" data-scramble>WHOAMI</h2>
+        <span class="sec-head__rule"></span>
+      </header>
+
+      <div class="whoami">
+        <div class="term" data-reveal>
+          <div class="term__bar"><i></i><i></i><i></i><span>root@mabaa: ~</span></div>
+          <div class="term__body mono" id="whoamiTerm" aria-live="off">
+            <p><span class="prompt">root@mabaa:~#</span> whoami</p>
+            <p class="out"><b class="hot">Muhammad Abdullah Bin Altaf Anjum</b></p>
+            <p><span class="prompt">root@mabaa:~#</span> cat profile.txt</p>
+            <p class="out">degree&nbsp;&nbsp;&nbsp;&nbsp;: BE Information Security</p>
+            <p class="out">campus&nbsp;&nbsp;&nbsp;&nbsp;: NUST — Military College of Signals</p>
+            <p class="out">cgpa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b class="ok">3.64</b></p>
+            <p class="out">role&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: President, Information Security Society</p>
+            <p class="out">target&nbsp;&nbsp;&nbsp;&nbsp;: Penetration testing · Red teaming</p>
+            <p class="out">specialty&nbsp;: Mobile (Android) security</p>
+            <p><span class="prompt">root@mabaa:~#</span> ./status --now</p>
+            <p class="out"><b class="ok">[+]</b> HTB CPTS ............ <b class="warn">IN PROGRESS</b></p>
+            <p class="out"><b class="ok">[+]</b> ASTRA (FYP) ......... <b class="warn">BUILDING</b></p>
+            <p class="out"><b class="ok">[+]</b> Next engagement ..... <b class="hot">YOURS?</b></p>
+            <p><span class="prompt">root@mabaa:~#</span> <span class="caret"></span></p>
+          </div>
+        </div>
+
+        <div class="focus">
+          <article class="focus__card" data-reveal>
+            <span class="focus__idx mono">0xA1</span>
+            <svg class="focus__ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="6"/><path d="M24 2v10M24 36v10M2 24h10M36 24h10"/></svg>
+            <h3>OFFENSE</h3>
+            <p>Vulnerability assessment &amp; penetration testing, WiFi hacking, CTF competition.</p>
+          </article>
+          <article class="focus__card" data-reveal>
+            <span class="focus__idx mono">0xA2</span>
+            <svg class="focus__ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="13" y="4" width="22" height="40" rx="4"/><path d="M21 38h6M18 16l6 6-6 6M26 28h5"/></svg>
+            <h3>MOBILE</h3>
+            <p>Android application security, and <b>ASTRA</b>, a custom-built Android pentesting tool.</p>
+          </article>
+          <article class="focus__card" data-reveal>
+            <span class="focus__idx mono">0xA3</span>
+            <svg class="focus__ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="20" cy="20" r="13"/><path d="M30 30l14 14M14 20h12M20 14v12"/></svg>
+            <h3>INTEL</h3>
+            <p>OSINT, cyber threat intelligence, attack-surface and digital-risk monitoring.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 02 MISSION LOG ================= -->
+    <section class="section" id="mission-log">
+      <header class="sec-head">
+        <span class="sec-head__num mono">02 //</span>
+        <h2 class="sec-head__title" data-scramble>MISSION LOG</h2>
+        <span class="sec-head__rule"></span>
+      </header>
+
+      <div class="timeline" id="timeline">
+        <span class="timeline__rail"><span class="timeline__fill" id="timelineFill"></span></span>
+
+        <article class="op" data-reveal>
+          <span class="op__node"></span>
+          <div class="op__meta mono">
+            <span class="op__date">JUN 2025 — JUL 2025</span>
+            <span class="op__id">OP-02</span>
+          </div>
+          <div class="op__card">
+            <span class="br br--tl"></span><span class="br br--br"></span>
+            <h3 class="op__role">Cyber Threat Analyst</h3>
+            <p class="op__org">CTM360<sup>®</sup></p>
+            <ul class="op__ops">
+              <li>Cyber Threat Intelligence <em>(CTI)</em></li>
+              <li>External Attack Surface Management <em>(EASM)</em></li>
+              <li>Digital Risk Protection <em>(DRP)</em></li>
+              <li>Phishing &amp; Scam Detection</li>
+              <li>DMARC, SPF &amp; DKIM Analysis</li>
+              <li>Third-Party Risk Management <em>(TPRM)</em></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="op" data-reveal>
+          <span class="op__node"></span>
+          <div class="op__meta mono">
+            <span class="op__date">JUL 2024 — AUG 2024</span>
+            <span class="op__id">OP-01</span>
+          </div>
+          <div class="op__card">
+            <span class="br br--tl"></span><span class="br br--br"></span>
+            <h3 class="op__role">IT Specialist</h3>
+            <p class="op__org">10Pearls</p>
+            <ul class="op__ops">
+              <li>VAPT &amp; Compliance</li>
+              <li>Endpoint Detection &amp; Response <em>(EDR)</em></li>
+              <li>CrowdStrike Falcon</li>
+              <li>Zscaler</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= 03 ARSENAL ================= -->
+    <section class="section" id="arsenal">
+      <header class="sec-head">
+        <span class="sec-head__num mono">03 //</span>
+        <h2 class="sec-head__title" data-scramble>ARSENAL</h2>
+        <span class="sec-head__rule"></span>
+      </header>
+
+      <div class="astra" data-reveal>
+        <div class="astra__copy">
+          <p class="mono astra__kicker"><span class="tag__dot"></span>CUSTOM BUILT // FINAL-YEAR PROJECT</p>
+          <h3 class="astra__title glitch" data-text="ASTRA">ASTRA</h3>
+          <p class="astra__sub"><strong>Android Static TLS Risk Analyzer.</strong> A custom-built Android application pentesting tool that statically hunts TLS misconfigurations inside APKs. Built at NUST MCS.</p>
+        </div>
+        <div class="astra__scan mono" aria-hidden="true">
+          <p>$ astra analyze ./target.apk</p>
+          <p class="dim">[*] unpacking apk ...</p>
+          <p class="dim">[*] parsing manifest &amp; network_security_config</p>
+          <p class="dim">[*] walking trust managers ...</p>
+          <p><b class="hot">[!] finding</b> custom TrustManager accepts all certs</p>
+          <p><b class="warn">[~] label</b> potentially weak</p>
+          <p class="ok">[+] report written</p>
+          <span class="astra__sweep"></span>
+        </div>
+      </div>
+
+      <h3 class="sub-head mono"><span>&gt;</span> skills.loaded</h3>
+      <div class="skills">
+        <article class="skill" data-reveal><span class="mono">0x01</span><h4>Vulnerability Assessment &amp; Penetration Testing</h4></article>
+        <article class="skill" data-reveal><span class="mono">0x02</span><h4>Android Application Security</h4></article>
+        <article class="skill" data-reveal><span class="mono">0x03</span><h4>Open Source Intelligence <em>(OSINT)</em></h4></article>
+        <article class="skill" data-reveal><span class="mono">0x04</span><h4>Threat Intelligence</h4></article>
+        <article class="skill" data-reveal><span class="mono">0x05</span><h4>WiFi Hacking</h4></article>
+        <article class="skill" data-reveal><span class="mono">0x06</span><h4>Discord Moderation</h4></article>
+      </div>
+
+      <h3 class="sub-head mono"><span>&gt;</span> tools.list</h3>
+      <ul class="tools" data-reveal>
+        <li><b>ASTRA</b><span>custom</span></li>
+        <li><b>Nmap</b><span>recon</span></li>
+        <li><b>Metasploit</b><span>exploit</span></li>
+        <li><b>Burp Suite</b><span>web</span></li>
+        <li><b>Kali Linux</b><span>platform</span></li>
+        <li><b>Cisco Packet Tracer</b><span>network</span></li>
+      </ul>
+    </section>
+
+    <!-- ================= 04 CREDS ================= -->
+    <section class="section" id="creds">
+      <header class="sec-head">
+        <span class="sec-head__num mono">04 //</span>
+        <h2 class="sec-head__title" data-scramble>CREDENTIALS</h2>
+        <span class="sec-head__rule"></span>
+      </header>
+
+      <div class="ranks">
+        <article class="rank" data-reveal>
+          <p class="rank__kicker mono">NATIONAL LEVEL CTF</p>
+          <p class="rank__num">#<span data-rank="13">99</span></p>
+          <h3>CodeCon-CUI ’24</h3>
+          <p class="rank__note mono">13th position</p>
+        </article>
+        <article class="rank" data-reveal>
+          <p class="rank__kicker mono">NATIONAL LEVEL OSINT CHALLENGE</p>
+          <p class="rank__num">#<span data-rank="16">99</span></p>
+          <h3>Blitzstorm</h3>
+          <p class="rank__note mono">16th position</p>
+        </article>
+      </div>
+
+      <h3 class="sub-head mono"><span>&gt;</span> certifications</h3>
+      <div class="certs">
+        <article class="cert cert--live" data-reveal>
+          <div class="cert__top mono"><span>HACK THE BOX</span><span class="chip chip--warn">IN PROGRESS</span></div>
+          <h4>Certified Penetration Testing Specialist <em>(CPTS)</em></h4>
+          <div class="cert__bar"><span></span></div>
+          <p class="cert__date mono">CURRENTLY UNDERGOING</p>
+        </article>
+        <article class="cert" data-reveal>
+          <div class="cert__top mono"><span>CISCO NETWORKING ACADEMY</span><span class="chip">EARNED</span></div>
+          <h4>Networking Basics</h4>
+          <p class="cert__date mono">AUG 2024</p>
+        </article>
+        <article class="cert" data-reveal>
+          <div class="cert__top mono"><span>ISO/IEC 27001</span><span class="chip">EARNED</span></div>
+          <h4>Information Security Associate</h4>
+          <p class="cert__date mono">MAY 2024</p>
+        </article>
+        <article class="cert" data-reveal>
+          <div class="cert__top mono"><span>EC-COUNCIL</span><span class="chip">EARNED</span></div>
+          <h4>Ethical Hacking Essentials</h4>
+          <p class="cert__date mono">MAR 2024</p>
+        </article>
+        <article class="cert" data-reveal>
+          <div class="cert__top mono"><span>TRYHACKME</span><span class="chip">EARNED</span></div>
+          <h4>Advent of Cyber</h4>
+          <p class="cert__date mono">DEC 2023</p>
+        </article>
+      </div>
+
+      <h3 class="sub-head mono"><span>&gt;</span> education</h3>
+      <div class="edu">
+        <article class="edu__card edu__card--main" data-reveal>
+          <p class="edu__score"><span data-count="3.64" data-decimals="2">0.00</span><small>CGPA</small></p>
+          <h4>National University of Sciences &amp; Technology</h4>
+          <p class="edu__meta mono">CAMPUS MCS · BE INFORMATION SECURITY · <b class="hot">CURRENT</b></p>
+        </article>
+        <article class="edu__card" data-reveal>
+          <p class="edu__score"><span data-count="85">0</span><small>%</small></p>
+          <h4>Bahria College Islamabad</h4>
+          <p class="edu__meta mono">FSc · ~GPA 3.6 · 2023</p>
+        </article>
+        <article class="edu__card" data-reveal>
+          <p class="edu__score"><span data-count="93">0</span><small>%</small></p>
+          <h4>APS&amp;C Multan</h4>
+          <p class="edu__meta mono">MATRIC · ~GPA 3.9 · 2021</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= 05 COMMAND ================= -->
+    <section class="section" id="command">
+      <header class="sec-head">
+        <span class="sec-head__num mono">05 //</span>
+        <h2 class="sec-head__title" data-scramble>COMMAND</h2>
+        <span class="sec-head__rule"></span>
+      </header>
+
+      <div class="lead">
+        <article class="lead__card lead__card--prime" data-reveal>
+          <p class="lead__when mono">SEP 2025 — <b class="hot">PRESENT</b></p>
+          <h3>PRESIDENT</h3>
+          <p class="lead__org">Information Security Society, NUST (MCS)</p>
+          <ul class="op__ops"><li>Event Management</li></ul>
+          <span class="lead__stamp mono">IN COMMAND</span>
+        </article>
+        <article class="lead__card" data-reveal>
+          <p class="lead__when mono">OCT 2023 — SEP 2025</p>
+          <h3>CLASS REPRESENTATIVE</h3>
+          <p class="lead__org">Information Security Society, NUST (MCS)</p>
+          <ul class="op__ops"><li>Course Management</li><li>Capture the Flag (CTF) Workshops</li></ul>
+        </article>
+      </div>
+
+      <h3 class="sub-head mono"><span>&gt;</span> ops.run</h3>
+      <ol class="opsrun">
+        <li data-reveal><span class="mono">01</span><b>CTF Manager</b><em>NUST Hackathon, DevCon ’25</em></li>
+        <li data-reveal><span class="mono">02</span><b>CYS Bootcamp Manager</b><em>Signalianz Security Hub (SSH)</em></li>
+        <li data-reveal><span class="mono">03</span><b>Welcome Management</b><em>Information Security Department</em></li>
+        <li data-reveal><span class="mono">04</span><b>Qawali Night</b><em>Event management</em></li>
+      </ol>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section class="contact" id="contact">
+      <p class="mono contact__kicker" data-reveal>// FINAL STAGE</p>
+      <h2 class="contact__title" data-reveal>
+        <span class="glitch" data-text="READY TO">READY TO</span>
+        <span class="contact__outline">ENGAGE.</span>
+      </h2>
+      <p class="contact__sub" data-reveal>Open to <strong>penetration testing</strong>, <strong>red team</strong> and <strong>security</strong> roles, internships and freelance work.</p>
+
+      <div class="channels" data-reveal>
+        <div class="channel">
+          <span class="channel__k mono">EMAIL</span>
+          <a href="mailto:mabaa2005@proton.me" class="channel__v">mabaa2005@proton.me</a>
+          <button class="channel__copy mono" data-copy="mabaa2005@proton.me" type="button">COPY</button>
+        </div>
+        <div class="channel">
+          <span class="channel__k mono">LINKEDIN</span>
+          <a href="https://www.linkedin.com/in/abdullahalltaf" class="channel__v" target="_blank" rel="noopener">/in/abdullahalltaf</a>
+          <a href="https://www.linkedin.com/in/abdullahalltaf" class="channel__copy mono" target="_blank" rel="noopener" aria-label="Open LinkedIn profile">OPEN ↗</a>
+        </div>
+      </div>
+
+      <div class="hero__ctas contact__ctas" data-reveal>
+        <a href="mailto:mabaa2005@proton.me?subject=Let%E2%80%99s%20talk" class="btn btn--red btn--xl magnetic"><span>Initiate contact</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="assets/Muhammad-Abdullah-Resume.pdf" class="btn btn--ghost btn--xl magnetic" download><span>Resume.pdf</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot mono">
+    <span>© <span id="year">2026</span> MUHAMMAD ABDULLAH BIN ALTAF ANJUM</span>
+    <button class="foot__hint mono" type="button">press <kbd>`</kbd> for a shell</button>
+    <span>// EOF</span>
+  </footer>
+
+  <!-- ================= EASTER EGG SHELL ================= -->
+  <div class="shell" id="shell" role="dialog" aria-modal="true" aria-label="Interactive shell" hidden>
+    <div class="shell__win">
+      <div class="term__bar"><i></i><i></i><i></i><span>guest@mabaa: ~ — type "help"</span><button class="shell__x mono" id="shellClose" type="button" aria-label="Close shell">ESC</button></div>
+      <div class="shell__out mono" id="shellOut"></div>
+      <form class="shell__in mono" id="shellForm" autocomplete="off">
+        <label for="shellInput" class="prompt">guest@mabaa:~$</label>
+        <input id="shellInput" spellcheck="false" autocapitalize="off">
+      </form>
+    </div>
+  </div>
+
+  <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="main.js"></script>
+</body>
+</html>
